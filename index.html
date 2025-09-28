@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExecX</title>
+    <!-- Link para o Font Awesome via CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         * {
             margin: 0;
@@ -107,6 +109,38 @@
             margin-bottom: 1rem;
             color: #ffffff;
             text-align: left;
+            display: flex;
+            align-items: center;
+
+        }
+
+        .platform-title i {
+            margin-right: 10px;
+            color: #4ecdc4; /* Cor de exemplo, pode ser ajustada */
+        }
+
+        .platform-badge {
+            background-color: #28a745; /* Cor padrão para 'Online' */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-left: auto; /* Alinha o badge à direita */
+        }
+
+        .platform-badge.new {
+            background-color: #007bff;
+        }
+
+        .platform-badge.popular {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .platform-badge.offline {
+            background-color: #dc3545;
         }
 
         .platform-description {
@@ -152,8 +186,13 @@
         }
 
         .access-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .access-button:active {
+            transform: translateY(0px) scale(0.98);
+            box-shadow: 0 5px 10px rgba(102, 126, 234, 0.2);
         }
 
         .icon {
@@ -197,8 +236,27 @@
             }
 
             .platforms-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Mantém 2 colunas ou mais */
                 gap: 1.5rem;
+            }
+
+            .platform-card {
+                padding: 2rem;
+            }
+
+            .platform-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) and (min-width: 481px) {
+            .platforms-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 colunas para tablets */
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
             }
 
             .platform-card {
@@ -247,7 +305,7 @@
         
         <div class="platforms-grid">
             <div class="platform-card tarefas">
-                <h2 class="platform-title">Tarefas</h2>
+                <h2 class="platform-title"><i class="fa-solid fa-list-check"></i> Tarefas <span class="platform-badge">Online</span></h2>
                 <p class="platform-description">Link para o script das Tarefas</p>
               <a href="https://taskitos.cupiditys.lol/" class="access-button">
                     Acessar
@@ -258,7 +316,7 @@
             </div>
 
             <div class="platform-card redacao">
-                <h2 class="platform-title">Redação</h2>
+                <h2 class="platform-title"><i class="fa-solid fa-pen-to-square"></i> Redação <span class="platform-badge">Online</span></h2>
                 <p class="platform-description">Link para o script das Redações</p>
                 <a href="https://redacao.cupiditys.lol/" class="access-button">
                     Acessar
@@ -269,7 +327,7 @@
             </div>
 
             <div class="platform-card khan">
-                <h2 class="platform-title">Khan</h2>
+                <h2 class="platform-title"><i class="fa-solid fa-graduation-cap"></i> Khan <span class="platform-badge">Online</span></h2>
                 <p class="platform-description">Link para o script do Khan</p>
                 <a href="https://crimsonstrauss.xyz/khan" class="access-button"> 
                     Acessar
@@ -280,7 +338,7 @@
             </div>
 
             <div class="platform-card leia">
-                <h2 class="platform-title">Leia</h2>
+                <h2 class="platform-title"><i class="fa-solid fa-book-open"></i> Leia <span class="platform-badge">Online</span></h2>
                 <p class="platform-description">Link para o script do Leia</p>
                 <a href="https://leiasp.cupiditys.lol/" class="access-button">
                     Acessar
@@ -291,7 +349,7 @@
             </div>
 
             <div class="platform-card speak">
-                <h2 class="platform-title">Speak</h2>
+                <h2 class="platform-title"><i class="fa-solid fa-microphone-lines"></i> Speak <span class="platform-badge">Online</span></h2>
                 <p class="platform-description">Link para o script do Speak</p>
                 <a href="https://speakify.cupiditys.lol/" class="access-button">
                     Acessar
@@ -302,7 +360,7 @@
             </div>
 
             <div class="platform-card alura">
-                <h2 class="platform-title">Alura</h2>
+                <h2 class="platform-title"><i class="fa-solid fa-laptop-code"></i> Alura <span class="platform-badge">Online</span></h2>
                 <p class="platform-description">Link para o script do Alura</p>
                 <a href="https://crimsonstrauss.xyz/alura" class="access-button">
                     Acessar
@@ -318,7 +376,7 @@
         // Criar partículas flutuantes
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
+            const particleCount = 100; // Aumentando o número de partículas
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -345,12 +403,9 @@
                 card.style.transform = 'translateY(50px)';
                 
                 setTimeout(() => {
-                    card.style.transition = 'all 0.6s ease';
+                    card.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
                 }, index * 200);
             });
         });
-    </script>
-</body>
-</html>
